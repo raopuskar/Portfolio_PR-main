@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Mail, MessageSquare, Send } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -8,10 +8,21 @@ export function ContactSection() {
     email: "",
     message: ""
   });
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    const subject = encodeURIComponent(`Contact from Portfolio: ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
+    const mailtoLink = `mailto:raopuskar4@gmail.com?subject=${subject}&body=${body}`;
+
+    setSuccessMessage(
+      "Opening your email client so you can send the message directly. If it does not open, copy the email address below."
+    );
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -103,6 +114,12 @@ export function ContactSection() {
               <Send className="w-5 h-5" />
               <span>Send Message</span>
             </motion.button>
+
+            {successMessage && (
+              <div className="rounded-lg border border-green-400/30 bg-green-500/10 px-4 py-3 text-sm text-green-100">
+                {successMessage}
+              </div>
+            )}
           </form>
 
           <motion.div

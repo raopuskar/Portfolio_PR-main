@@ -47,7 +47,7 @@ export default function App() {
 
       <footer className="py-8 px-4 border-t border-cyan-500/20">
         <div className="container mx-auto max-w-6xl text-center text-gray-500">
-          <p>© 2026 John Anderson. All systems operational.</p>
+          <p>© 2026 Puskar Rao. All systems operational.</p>
         </div>
       </footer>
     </div>
